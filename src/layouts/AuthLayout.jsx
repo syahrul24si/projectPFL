@@ -1,23 +1,39 @@
+// import { Outlet } from "react-router-dom";
+
+// export default function AuthLayout() {
+//     return (
+//         <div className="min-h-screen flex items-center justify-center bg-gray-100">
+//             <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+//                 <div className="flex items-center justify-center mb-6">
+//                     <h1 className="text-4xl font-poppins font-extrabold text-gray-800">
+//                         <span className="text-black">Sedap</span>
+//                         <span className="text-green-500">.</span>
+//                     </h1>
+//                 </div>
+
+//                 <Outlet/>
+
+//                 <p className="text-center text-sm text-gray-500 mt-6">
+//                     © 2025 Sedap Restaurant Admin Dashboard. All rights
+//                     reserved.
+//                 </p>
+//             </div>
+//         </div>
+//     )
+// }
+
 import { Outlet } from "react-router-dom";
 
 export default function AuthLayout() {
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-                <div className="flex items-center justify-center mb-6">
-                    <h1 className="text-4xl font-poppins font-extrabold text-gray-800">
-                        <span className="text-black">Sedap</span>
-                        <span className="text-green-500">.</span>
-                    </h1>
-                </div>
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-md">
+        <Outlet />
 
-                <Outlet/>
-
-                <p className="text-center text-sm text-gray-500 mt-6">
-                    © 2025 Sedap Restaurant Admin Dashboard. All rights
-                    reserved.
-                </p>
-            </div>
-        </div>
-    )
+        <p className="mt-6 text-center text-sm text-gray-500">
+          © 2025 Bengkel Workshop Admin Dashboard. All rights reserved.
+        </p>
+      </div>
+    </div>
+  );
 }
