@@ -1,5 +1,6 @@
 import PageHeader from "../../components/PageHeader";
 import { FaUserCog } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Mechanics() {
   const mechanics = [
@@ -89,6 +90,7 @@ export default function Mechanics() {
                 <th className="px-4 py-2">Spesialis</th>
                 <th className="px-4 py-2">No. Telepon</th>
                 <th className="px-4 py-2">Status</th>
+                <th className="px-4 py-2">Aksi</th>
               </tr>
             </thead>
 
@@ -114,18 +116,26 @@ export default function Mechanics() {
                     {mechanic.phone}
                   </td>
 
-                  <td className="rounded-r-xl px-4 py-4">
+                  <td className="px-4 py-4">
                     <span
-                      className={`rounded-full px-3 py-1 text-xs font-bold ${
-                        mechanic.status === "Aktif"
+                      className={`rounded-full px-3 py-1 text-xs font-bold ${mechanic.status === "Aktif"
                           ? "bg-green-100 text-green-700"
                           : mechanic.status === "Sibuk"
                             ? "bg-yellow-100 text-yellow-700"
                             : "bg-red-100 text-red-700"
-                      }`}
+                        }`}
                     >
                       {mechanic.status}
                     </span>
+                  </td>
+
+                  <td className="rounded-r-xl px-4 py-4">
+                    <Link
+                      to={`/mechanics/${mechanic.id}`}
+                      className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-yellow-500 hover:text-gray-900"
+                    >
+                      Detail
+                    </Link>
                   </td>
                 </tr>
               ))}

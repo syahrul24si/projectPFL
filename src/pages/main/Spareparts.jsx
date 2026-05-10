@@ -1,5 +1,6 @@
 import PageHeader from "../../components/PageHeader";
 import { MdInventory } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export default function Spareparts() {
   const spareparts = [
@@ -95,6 +96,7 @@ export default function Spareparts() {
                 <th className="px-4 py-2">Stok</th>
                 <th className="px-4 py-2">Harga</th>
                 <th className="px-4 py-2">Status</th>
+                <th className="px-4 py-2">Aksi</th>
               </tr>
             </thead>
 
@@ -122,7 +124,7 @@ export default function Spareparts() {
                     Rp {Number(item.price).toLocaleString("id-ID")}
                   </td>
 
-                  <td className="rounded-r-xl px-4 py-4">
+                  <td className="px-4 py-4">
                     <span
                       className={`rounded-full px-3 py-1 text-xs font-bold ${
                         item.status === "Tersedia"
@@ -134,6 +136,15 @@ export default function Spareparts() {
                     >
                       {item.status}
                     </span>
+                  </td>
+
+                  <td className="rounded-r-xl px-4 py-4">
+                    <Link
+                      to={`/spareparts/${item.id}`}
+                      className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-yellow-500 hover:text-gray-900"
+                    >
+                      Detail
+                    </Link>
                   </td>
                 </tr>
               ))}

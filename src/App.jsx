@@ -10,7 +10,9 @@ const Dashboard = React.lazy(() => import("./pages/main/Dashboard"));
 const Orders = React.lazy(() => import("./pages/main/Orders"));
 const Customers = React.lazy(() => import("./pages/main/Customers"));
 const Mechanics = React.lazy(() => import("./pages/main/Mechanics"));
+const MechanicDetail = React.lazy(() => import("./pages/main/MechanicDetail"));
 const Spareparts = React.lazy(() => import("./pages/main/Spareparts"));
+const SparepartDetail = React.lazy(() => import("./pages/main/SparepartDetail"));
 
 const NotFound = React.lazy(() => import("./pages/main/NotFound"));
 const Error400 = React.lazy(() => import("./pages/main/Error400"));
@@ -31,8 +33,13 @@ export default function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
+
           <Route path="/mechanics" element={<Mechanics />} />
+          <Route path="/mechanics/:id" element={<MechanicDetail />} />
+
           <Route path="/spareparts" element={<Spareparts />} />
+          <Route path="/spareparts/:id" element={<SparepartDetail />} />
+
           <Route path="/error-400" element={<Error400 />} />
           <Route path="/error-401" element={<Error401 />} />
           <Route path="/error-403" element={<Error403 />} />
