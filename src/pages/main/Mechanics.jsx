@@ -1,146 +1,155 @@
-import PageHeader from "../../components/PageHeader";
-import { FaUserCog } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import {
+  MoreHorizontal,
+  Search,
+  Filter,
+  FileDown,
+  UserCircle,
+} from "lucide-react";
+
+const mechanics = [
+  {
+    id: 1,
+    nama: "Andi Pratama",
+    spesialis: "Mesin",
+    pengalaman: "5 Tahun",
+    status: "Aktif",
+  },
+  {
+    id: 2,
+    nama: "Deni Saputra",
+    spesialis: "Kelistrikan",
+    pengalaman: "4 Tahun",
+    status: "Aktif",
+  },
+  {
+    id: 3,
+    nama: "Rizky Maulana",
+    spesialis: "Body Repair",
+    pengalaman: "3 Tahun",
+    status: "Cuti",
+  },
+  {
+    id: 4,
+    nama: "Fajar Nugroho",
+    spesialis: "General Service",
+    pengalaman: "6 Tahun",
+    status: "Aktif",
+  },
+];
 
 export default function Mechanics() {
-  const mechanics = [
-    {
-      id: "MK001",
-      name: "Rudi Hartono",
-      specialist: "Mesin",
-      phone: "081234567811",
-      status: "Aktif",
-    },
-    {
-      id: "MK002",
-      name: "Agus Pratama",
-      specialist: "Kelistrikan",
-      phone: "081234567812",
-      status: "Aktif",
-    },
-    {
-      id: "MK003",
-      name: "Doni Saputra",
-      specialist: "Kaki-kaki",
-      phone: "081234567813",
-      status: "Libur",
-    },
-    {
-      id: "MK004",
-      name: "Fajar Maulana",
-      specialist: "AC Mobil",
-      phone: "081234567814",
-      status: "Aktif",
-    },
-    {
-      id: "MK005",
-      name: "Rizky Ramadhan",
-      specialist: "Body Repair",
-      phone: "081234567815",
-      status: "Sibuk",
-    },
-  ];
-
   return (
-    <div>
-      <PageHeader
-        title="Data Mekanik"
-        breadcrumb={["Dashboard", "Mekanik"]}
-      />
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <select className="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-600">
+          <option>Semua Mekanik</option>
+        </select>
 
-      <div className="mb-6 grid gap-4 md:grid-cols-3">
-        <div className="rounded-2xl bg-white p-5 shadow-md">
-          <p className="text-sm text-gray-500">Total Mekanik</p>
-          <h3 className="mt-2 text-3xl font-bold text-gray-900">5</h3>
-        </div>
-
-        <div className="rounded-2xl bg-white p-5 shadow-md">
-          <p className="text-sm text-gray-500">Mekanik Aktif</p>
-          <h3 className="mt-2 text-3xl font-bold text-green-600">3</h3>
-        </div>
-
-        <div className="rounded-2xl bg-white p-5 shadow-md">
-          <p className="text-sm text-gray-500">Spesialis Service</p>
-          <h3 className="mt-2 text-3xl font-bold text-yellow-500">5</h3>
+        <div className="flex gap-3">
+          <button className="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-500 flex items-center gap-2">
+            <FileDown size={16} />
+            Import
+          </button>
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl bg-white shadow-md">
-        <div className="flex items-center justify-between border-b bg-gray-900 px-5 py-4">
-          <div>
-            <h2 className="text-lg font-bold text-white">
-              Daftar Mekanik Bengkel
-            </h2>
-            <p className="text-sm text-gray-300">
-              Data mekanik dan spesialis pengerjaan service
-            </p>
+      <div className="bg-white rounded-2xl p-5 shadow-sm">
+        <div className="flex justify-between mb-5">
+          <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 w-full max-w-md">
+            <Search size={18} className="text-gray-400" />
+            <input
+              className="bg-transparent outline-none text-sm w-full"
+              placeholder="Cari nama mekanik atau spesialis..."
+            />
           </div>
 
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-yellow-400 text-gray-900">
-            <FaUserCog className="text-xl" />
-          </div>
+          <button className="ml-4 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-500 flex items-center gap-2">
+            <Filter size={16} />
+            Filters
+          </button>
         </div>
 
-        <div className="overflow-x-auto p-4">
-          <table className="min-w-full border-separate border-spacing-y-3">
-            <thead>
-              <tr className="text-left text-sm text-gray-500">
-                <th className="px-4 py-2">ID Mekanik</th>
-                <th className="px-4 py-2">Nama Mekanik</th>
-                <th className="px-4 py-2">Spesialis</th>
-                <th className="px-4 py-2">No. Telepon</th>
-                <th className="px-4 py-2">Status</th>
-                <th className="px-4 py-2">Aksi</th>
-              </tr>
-            </thead>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-gray-400 border-b border-gray-100">
+              <th className="py-4 w-10">
+                <input type="checkbox" />
+              </th>
+              <th>ID Mekanik</th>
+              <th>Nama Mekanik</th>
+              <th>Spesialis</th>
+              <th>Pengalaman</th>
+              <th>Status</th>
+              <th className="text-right">Aksi</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              {mechanics.map((mechanic) => (
-                <tr
-                  key={mechanic.id}
-                  className="rounded-xl bg-gray-50 shadow-sm transition duration-300 hover:bg-yellow-50 hover:shadow-md"
-                >
-                  <td className="rounded-l-xl px-4 py-4 font-bold text-gray-900">
-                    {mechanic.id}
-                  </td>
+          <tbody>
+            {mechanics.map((item) => (
+              <tr
+                key={item.id}
+                className="border-b border-gray-100 hover:bg-lime-50/40 transition"
+              >
+                <td className="py-5">
+                  <input type="checkbox" />
+                </td>
 
-                  <td className="px-4 py-4 text-gray-700">
-                    {mechanic.name}
-                  </td>
+                <td className="font-semibold text-gray-700">
+                  MK-{String(item.id).padStart(3, "0")}
+                </td>
 
-                  <td className="px-4 py-4 text-gray-600">
-                    {mechanic.specialist}
-                  </td>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-lime-100 flex items-center justify-center">
+                      <UserCircle size={24} className="text-lime-600" />
+                    </div>
 
-                  <td className="px-4 py-4 text-gray-600">
-                    {mechanic.phone}
-                  </td>
-
-                  <td className="px-4 py-4">
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-bold ${mechanic.status === "Aktif"
-                          ? "bg-green-100 text-green-700"
-                          : mechanic.status === "Sibuk"
-                            ? "bg-yellow-100 text-yellow-700"
-                            : "bg-red-100 text-red-700"
-                        }`}
-                    >
-                      {mechanic.status}
+                    <span className="font-semibold text-gray-800">
+                      {item.nama}
                     </span>
-                  </td>
+                  </div>
+                </td>
 
-                  <td className="rounded-r-xl px-4 py-4">
-                    <Link
-                      to={`/mechanics/${mechanic.id}`}
-                      className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-yellow-500 hover:text-gray-900"
-                    >
-                      Detail
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                <td>{item.spesialis}</td>
+                <td>{item.pengalaman}</td>
+
+                <td>
+                  <span
+                    className={`px-4 py-2 rounded-full text-xs font-semibold ${
+                      item.status === "Aktif"
+                        ? "bg-lime-100 text-lime-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </td>
+
+                <td className="text-right">
+                  <Link
+                    to={`/mechanics/${item.id}`}
+                    className="p-2 hover:bg-gray-100 rounded-lg inline-flex"
+                  >
+                    <MoreHorizontal size={20} />
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
+          <p>Show result: 4</p>
+
+          <div className="flex items-center gap-3">
+            <button className="px-3 py-1 rounded-lg bg-black text-white">
+              1
+            </button>
+            <button>2</button>
+            <button>3</button>
+            <button>...</button>
+          </div>
         </div>
       </div>
     </div>

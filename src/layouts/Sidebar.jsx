@@ -1,85 +1,65 @@
 import { NavLink } from "react-router-dom";
-import { MdSpaceDashboard, MdErrorOutline, MdInventory } from "react-icons/md";
-import { FaTools, FaCar, FaUserCog } from "react-icons/fa";
+import {
+  LayoutDashboard,
+  Users,
+  Package,
+  Wrench,
+  LogOut,
+} from "lucide-react";
+
+const menus = [
+  { name: "Dashboard", path: "/", icon: LayoutDashboard },
+  { name: "Mekanik", path: "/mechanics", icon: Users },
+  { name: "Sparepart", path: "/spareparts", icon: Package },
+  { name: "Pelanggan", path: "/customers", icon: Users },
+];
 
 export default function Sidebar() {
-  const menuClass = ({ isActive }) =>
-    `flex cursor-pointer items-center rounded-xl p-4 space-x-2 ${
-      isActive
-        ? "bg-yellow-400 text-gray-900 font-extrabold"
-        : "text-gray-300 hover:bg-yellow-400 hover:text-gray-900 hover:font-extrabold"
-    }`;
-
   return (
-    <div className="fixed left-0 top-0 h-screen w-64 bg-gray-900 p-4 shadow-md">
-      <div className="mb-8">
-        <h1 className="text-5xl font-extrabold text-white">
-          Bengkel<span className="text-yellow-400">.</span>
-        </h1>
-        <p className="mt-2 text-sm text-gray-400">Workshop Admin Dashboard</p>
+    <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-white border-r border-gray-100 px-5 py-6">
+      <div className="flex items-center gap-3 mb-12">
+        <div className="w-11 h-11 rounded-2xl bg-lime-300 flex items-center justify-center">
+          <Wrench className="text-lime-700" size={28} />
+        </div>
+
+        <div>
+          <h1 className="text-xl font-bold text-lime-700 leading-none">
+            BENGKEL
+          </h1>
+          <p className="text-sm text-gray-500">Management System</p>
+        </div>
       </div>
 
-      <ul className="space-y-3">
-        <li>
-          <NavLink id="menu-1" to="/" className={menuClass}>
-            <MdSpaceDashboard className="mr-4 text-xl" />
-            Dashboard
-          </NavLink>
-        </li>
+      <nav className="space-y-3">
+        {menus.map((item) => {
+          const Icon = item.icon;
 
-        <li>
-          <NavLink id="menu-2" to="/orders" className={menuClass}>
-            <FaTools className="mr-4 text-xl" />
-            Service
-          </NavLink>
-        </li>
+          return (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              end={item.path === "/"}
+              className={({ isActive }) =>
+                `flex items-center gap-4 px-5 py-4 rounded-xl text-sm font-semibold transition ${
+                  isActive
+                    ? "bg-lime-300 text-gray-950 shadow-sm"
+                    : "text-gray-500 hover:bg-lime-50 hover:text-lime-700"
+                }`
+              }
+            >
+              <Icon size={20} />
+              {item.name}
+            </NavLink>
+          );
+        })}
+      </nav>
 
-        <li>
-          <NavLink id="menu-3" to="/customers" className={menuClass}>
-            <FaCar className="mr-4 text-xl" />
-            Kendaraan
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink id="menu-4" to="/mechanics" className={menuClass}>
-            <FaUserCog className="mr-4 text-xl" />
-            Mekanik
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink id="menu-5" to="/spareparts" className={menuClass}>
-            <MdInventory className="mr-4 text-xl" />
-            Sparepart
-          </NavLink>
-        </li>
-
-        <li className="pt-4 text-xs font-bold uppercase tracking-wider text-gray-500">
-          Error Pages
-        </li>
-
-        <li>
-          <NavLink id="menu-6" to="/error-400" className={menuClass}>
-            <MdErrorOutline className="mr-4 text-xl" />
-            Error 400
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink id="menu-7" to="/error-401" className={menuClass}>
-            <MdErrorOutline className="mr-4 text-xl" />
-            Error 401
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink id="menu-8" to="/error-403" className={menuClass}>
-            <MdErrorOutline className="mr-4 text-xl" />
-            Error 403
-          </NavLink>
-        </li>
-      </ul>
-    </div>
+      <div className="absolute bottom-8 left-5 right-5 border-t border-gray-100 pt-5">
+        <button className="flex items-center gap-4 text-gray-500 font-semibold hover:text-red-500 transition">
+          <LogOut size={20} />
+          Logout
+        </button>
+      </div>
+    </aside>
   );
 }

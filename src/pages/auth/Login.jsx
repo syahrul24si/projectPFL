@@ -1,127 +1,73 @@
-import axios from "axios";
-import { useState } from "react";
-import { BsFillExclamationDiamondFill } from "react-icons/bs";
-import { ImSpinner2 } from "react-icons/im";
-import { FaTools } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { EyeOff } from "lucide-react";
 
 export default function Login() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [dataForm, setDataForm] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setDataForm({
-      ...dataForm,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setLoading(true);
-    setError(false);
-
-    axios
-      .post("https://dummyjson.com/user/login", {
-        username: dataForm.email,
-        password: dataForm.password,
-      })
-      .then((response) => {
-        if (response.status !== 200) {
-          setError(response.data.message);
-          return;
-        }
-
-        navigate("/");
-      })
-      .catch((err) => {
-        if (err.response) {
-          setError(err.response.data.message || "An error occurred");
-        } else {
-          setError(err.message || "An unknown error occurred");
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const errorInfo = error ? (
-    <div className="mb-5 flex items-center rounded-lg bg-red-100 p-4 text-sm font-medium text-red-700">
-      <BsFillExclamationDiamondFill className="me-2 text-lg text-red-600" />
-      {error}
-    </div>
-  ) : null;
-
-  const loadingInfo = loading ? (
-    <div className="mb-5 flex items-center rounded-lg bg-gray-200 p-4 text-sm font-medium text-gray-700">
-      <ImSpinner2 className="me-2 animate-spin" />
-      Mohon Tunggu...
-    </div>
-  ) : null;
-
   return (
-    <div>
-      <div className="mb-6 text-center">
-        <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gray-900 text-yellow-400">
-          <FaTools className="text-2xl" />
-        </div>
+    <div className="w-full max-w-md bg-white rounded-2xl shadow-xl px-8 py-9">
+      <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">
+        Login to your account
+      </h2>
 
-        <h2 className="text-3xl font-extrabold text-gray-900">
-          Bengkel<span className="text-yellow-400">.</span>
-        </h2>
+      <form className="space-y-4">
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full bg-gray-50 rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-lime-300"
+        />
 
-        <p className="mt-2 text-sm font-medium text-gray-500">
-          Login ke Workshop Admin Dashboard
-        </p>
-      </div>
-
-      {errorInfo}
-      {loadingInfo}
-
-      <form onSubmit={handleSubmit}>
-        <div className="mb-5">
-          <label className="mb-1 block text-sm font-medium text-gray-700">
-            Username
-          </label>
-          <input
-            type="text"
-            id="email"
-            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 shadow-sm placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
-            placeholder="Masukkan username"
-            name="email"
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="mb-6">
-          <label className="mb-1 block text-sm font-medium text-gray-700">
-            Password
-          </label>
+        <div className="relative">
           <input
             type="password"
-            id="password"
-            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 shadow-sm placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
-            placeholder="********"
-            name="password"
-            onChange={handleChange}
+            placeholder="Password"
+            className="w-full bg-gray-50 rounded-lg px-4 py-3 pr-10 text-sm outline-none focus:ring-2 focus:ring-lime-300"
           />
+          <EyeOff
+            size={18}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
+          />
+        </div>
+
+        <div className="flex items-center justify-between text-xs">
+          <label className="flex items-center gap-2 text-gray-600">
+            <input type="checkbox" className="accent-lime-400" />
+            Remember me
+          </label>
+
+          <a href="#" className="text-lime-600 font-semibold">
+            Forgot Password?
+          </a>
         </div>
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-yellow-400 px-4 py-2 font-bold text-gray-900 transition duration-300 hover:bg-yellow-500"
+          className="w-full bg-lime-300 hover:bg-lime-400 transition rounded-lg py-3 text-sm font-bold text-black"
         >
-          Login
+          Sign in with email
         </button>
       </form>
+
+      <div className="flex items-center gap-3 my-6">
+        <div className="h-px bg-gray-200 flex-1"></div>
+        <span className="text-xs text-gray-400">Or login with</span>
+        <div className="h-px bg-gray-200 flex-1"></div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <button className="border border-gray-200 rounded-lg py-3 text-sm font-medium flex items-center justify-center gap-2">
+          Google
+        </button>
+
+        <button className="border border-gray-200 rounded-lg py-3 text-sm font-medium flex items-center justify-center gap-2">
+          Apple
+        </button>
+      </div>
+
+      <p className="text-center text-xs text-gray-500 mt-7">
+        Don&apos;t have an account?{" "}
+        <Link to="/register" className="text-lime-600 font-bold">
+          Get Started
+        </Link>
+      </p>
     </div>
   );
 }

@@ -1,72 +1,38 @@
-import { FaBell, FaSearch, FaUserCog } from "react-icons/fa";
-import { FcAreaChart } from "react-icons/fc";
-import { SlSettings } from "react-icons/sl";
+import { Bell, Mail, Search } from "lucide-react";
 
 export default function Header() {
   return (
-    <div
-      id="header-container"
-      className="flex items-center justify-between border-b border-gray-200 bg-gray-100 p-4"
-    >
-      {/* Search Bar */}
-      <div id="search-bar" className="relative w-full max-w-lg">
-        <input
-          id="search-input"
-          type="text"
-          placeholder="Cari data service..."
-          className="w-full max-w-lg rounded-md border border-gray-300 bg-white p-2 pr-10 outline-none focus:border-yellow-400"
-        />
-        <FaSearch
-          id="search-icon"
-          className="absolute right-4 top-1/2 -translate-y-1/2 transform text-gray-400"
-        />
+    <header className="sticky top-0 z-30 ml-64 h-20 bg-white/90 backdrop-blur border-b border-gray-100 px-8 flex items-center justify-between">
+      <div>
+        <h2 className="text-2xl font-bold text-gray-950">Hi, Admin Bengkel</h2>
+        <p className="text-sm text-gray-500">Let's check your Garage today</p>
       </div>
 
-      {/* Icon & Profile Section */}
-      <div id="icons-container" className="flex items-center space-x-4">
-        <div
-          id="notification-icon"
-          className="relative cursor-pointer rounded-2xl bg-yellow-100 p-3 text-yellow-600"
-        >
-          <FaBell />
-          <span
-            id="notification-badge"
-            className="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 rounded-full bg-yellow-400 px-2 py-1 text-xs font-bold text-gray-900"
-          >
-            50
-          </span>
+      <div className="flex items-center gap-6">
+        <div className="w-[420px] h-12 rounded-xl bg-gray-100 flex items-center px-4 gap-3">
+          <Search size={20} className="text-gray-500" />
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-transparent outline-none w-full text-sm"
+          />
         </div>
 
-        <div
-          id="chart-icon"
-          className="cursor-pointer rounded-2xl bg-gray-200 p-3"
-        >
-          <FcAreaChart />
-        </div>
+        <Mail size={22} className="text-gray-700" />
+        <Bell size={22} className="text-gray-700" />
 
-        <div
-          id="settings-icon"
-          className="cursor-pointer rounded-2xl bg-red-100 p-3 text-red-500"
-        >
-          <SlSettings />
-        </div>
-
-        <div
-          id="profile-container"
-          className="flex items-center space-x-4 border-l border-gray-300 pl-4"
-        >
-          <span id="profile-text">
-            Halo, <b>Syahrul Ramadhan</b>
-          </span>
-
-          <div
-            id="profile-avatar"
-            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-yellow-400 bg-gray-900 text-yellow-400"
-          >
-            <FaUserCog className="text-xl" />
+        <div className="flex items-center gap-3">
+          <img
+            src="https://i.pravatar.cc/80?img=12"
+            alt="profile"
+            className="w-11 h-11 rounded-full object-cover"
+          />
+          <div>
+            <h3 className="font-bold text-sm text-gray-950">Admin Bengkel</h3>
+            <p className="text-xs text-gray-500">Owner</p>
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }

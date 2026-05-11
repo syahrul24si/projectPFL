@@ -1,155 +1,161 @@
-import PageHeader from "../../components/PageHeader";
-import { MdInventory } from "react-icons/md";
 import { Link } from "react-router-dom";
+import {
+  MoreHorizontal,
+  Search,
+  Filter,
+  FileDown,
+  Package,
+} from "lucide-react";
+
+const spareparts = [
+  {
+    id: 1,
+    nama: "Oli Mesin",
+    kategori: "Engine",
+    stok: 120,
+    harga: "Rp 85.000",
+    status: "Ready",
+  },
+  {
+    id: 2,
+    nama: "Kampas Rem",
+    kategori: "Brake System",
+    stok: 75,
+    harga: "Rp 150.000",
+    status: "Ready",
+  },
+  {
+    id: 3,
+    nama: "Aki Motor",
+    kategori: "Electrical",
+    stok: 24,
+    harga: "Rp 320.000",
+    status: "Low Stock",
+  },
+  {
+    id: 4,
+    nama: "Busi",
+    kategori: "Ignition",
+    stok: 180,
+    harga: "Rp 35.000",
+    status: "Ready",
+  },
+];
 
 export default function Spareparts() {
-  const spareparts = [
-    {
-      id: "SPR001",
-      name: "Oli Mesin",
-      category: "Perawatan",
-      stock: 25,
-      price: 85000,
-      status: "Tersedia",
-    },
-    {
-      id: "SPR002",
-      name: "Busi",
-      category: "Mesin",
-      stock: 40,
-      price: 35000,
-      status: "Tersedia",
-    },
-    {
-      id: "SPR003",
-      name: "Kampas Rem",
-      category: "Rem",
-      stock: 12,
-      price: 120000,
-      status: "Menipis",
-    },
-    {
-      id: "SPR004",
-      name: "Aki Mobil",
-      category: "Kelistrikan",
-      stock: 6,
-      price: 650000,
-      status: "Menipis",
-    },
-    {
-      id: "SPR005",
-      name: "Filter Udara",
-      category: "Mesin",
-      stock: 0,
-      price: 75000,
-      status: "Habis",
-    },
-  ];
-
   return (
-    <div>
-      <PageHeader
-        title="Data Sparepart"
-        breadcrumb={["Dashboard", "Sparepart"]}
-      />
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <select className="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-600">
+          <option>Semua Sparepart</option>
+        </select>
 
-      <div className="mb-6 grid gap-4 md:grid-cols-3">
-        <div className="rounded-2xl bg-white p-5 shadow-md">
-          <p className="text-sm text-gray-500">Total Sparepart</p>
-          <h3 className="mt-2 text-3xl font-bold text-gray-900">5</h3>
-        </div>
-
-        <div className="rounded-2xl bg-white p-5 shadow-md">
-          <p className="text-sm text-gray-500">Stok Tersedia</p>
-          <h3 className="mt-2 text-3xl font-bold text-green-600">2</h3>
-        </div>
-
-        <div className="rounded-2xl bg-white p-5 shadow-md">
-          <p className="text-sm text-gray-500">Stok Menipis/Habis</p>
-          <h3 className="mt-2 text-3xl font-bold text-yellow-500">3</h3>
+        <div className="flex gap-3">
+          <button className="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-500 flex items-center gap-2">
+            <FileDown size={16} />
+            Import
+          </button>
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl bg-white shadow-md">
-        <div className="flex items-center justify-between border-b bg-gray-900 px-5 py-4">
-          <div>
-            <h2 className="text-lg font-bold text-white">
-              Daftar Sparepart Bengkel
-            </h2>
-            <p className="text-sm text-gray-300">
-              Data stok dan harga sparepart kendaraan
-            </p>
+      <div className="bg-white rounded-2xl p-5 shadow-sm">
+        <div className="flex justify-between mb-5">
+          <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 w-full max-w-md">
+            <Search size={18} className="text-gray-400" />
+            <input
+              className="bg-transparent outline-none text-sm w-full"
+              placeholder="Cari nama sparepart atau kategori..."
+            />
           </div>
 
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-yellow-400 text-gray-900">
-            <MdInventory className="text-xl" />
-          </div>
+          <button className="ml-4 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-500 flex items-center gap-2">
+            <Filter size={16} />
+            Filters
+          </button>
         </div>
 
-        <div className="overflow-x-auto p-4">
-          <table className="min-w-full border-separate border-spacing-y-3">
-            <thead>
-              <tr className="text-left text-sm text-gray-500">
-                <th className="px-4 py-2">ID Sparepart</th>
-                <th className="px-4 py-2">Nama Sparepart</th>
-                <th className="px-4 py-2">Kategori</th>
-                <th className="px-4 py-2">Stok</th>
-                <th className="px-4 py-2">Harga</th>
-                <th className="px-4 py-2">Status</th>
-                <th className="px-4 py-2">Aksi</th>
-              </tr>
-            </thead>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-gray-400 border-b border-gray-100">
+              <th className="py-4 w-10">
+                <input type="checkbox" />
+              </th>
+              <th>ID Sparepart</th>
+              <th>Nama Sparepart</th>
+              <th>Kategori</th>
+              <th>Stok</th>
+              <th>Harga</th>
+              <th>Status</th>
+              <th className="text-right">Aksi</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              {spareparts.map((item) => (
-                <tr
-                  key={item.id}
-                  className="rounded-xl bg-gray-50 shadow-sm transition duration-300 hover:bg-yellow-50 hover:shadow-md"
-                >
-                  <td className="rounded-l-xl px-4 py-4 font-bold text-gray-900">
-                    {item.id}
-                  </td>
+          <tbody>
+            {spareparts.map((item) => (
+              <tr
+                key={item.id}
+                className="border-b border-gray-100 hover:bg-lime-50/40 transition"
+              >
+                <td className="py-5">
+                  <input type="checkbox" />
+                </td>
 
-                  <td className="px-4 py-4 text-gray-700">{item.name}</td>
+                <td className="font-semibold text-gray-700">
+                  SP-{String(item.id).padStart(3, "0")}
+                </td>
 
-                  <td className="px-4 py-4 text-gray-600">
-                    {item.category}
-                  </td>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-lime-100 flex items-center justify-center">
+                      <Package size={22} className="text-lime-600" />
+                    </div>
 
-                  <td className="px-4 py-4 font-semibold text-gray-900">
-                    {item.stock}
-                  </td>
-
-                  <td className="px-4 py-4 font-semibold text-gray-900">
-                    Rp {Number(item.price).toLocaleString("id-ID")}
-                  </td>
-
-                  <td className="px-4 py-4">
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-bold ${
-                        item.status === "Tersedia"
-                          ? "bg-green-100 text-green-700"
-                          : item.status === "Menipis"
-                            ? "bg-yellow-100 text-yellow-700"
-                            : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {item.status}
+                    <span className="font-semibold text-gray-800">
+                      {item.nama}
                     </span>
-                  </td>
+                  </div>
+                </td>
 
-                  <td className="rounded-r-xl px-4 py-4">
-                    <Link
-                      to={`/spareparts/${item.id}`}
-                      className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-yellow-500 hover:text-gray-900"
-                    >
-                      Detail
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                <td>{item.kategori}</td>
+                <td>{item.stok} pcs</td>
+                <td>{item.harga}</td>
+
+                <td>
+                  <span
+                    className={`px-4 py-2 rounded-full text-xs font-semibold ${
+                      item.status === "Ready"
+                        ? "bg-lime-100 text-lime-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </td>
+
+                <td className="text-right">
+                  <Link
+                    to={`/spareparts/${item.id}`}
+                    className="p-2 hover:bg-gray-100 rounded-lg inline-flex"
+                  >
+                    <MoreHorizontal size={20} />
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
+          <p>Show result: 4</p>
+
+          <div className="flex items-center gap-3">
+            <button className="px-3 py-1 rounded-lg bg-black text-white">
+              1
+            </button>
+            <button>2</button>
+            <button>3</button>
+            <button>...</button>
+          </div>
         </div>
       </div>
     </div>

@@ -1,200 +1,155 @@
-import { useState } from "react";
-import PageHeader from "../../components/PageHeader";
-import customersData from "../../data/customers";
+import {
+  MoreHorizontal,
+  Search,
+  Filter,
+  FileDown,
+  UserCircle,
+} from "lucide-react";
+
+const customers = [
+  {
+    id: 1,
+    nama: "Budi Santoso",
+    alamat: "Bandung",
+    telepon: "0812-3456-7890",
+    kendaraan: "Honda Beat",
+    status: "Aktif",
+  },
+  {
+    id: 2,
+    nama: "Rudi Hermawan",
+    alamat: "Jakarta",
+    telepon: "0821-9876-5432",
+    kendaraan: "Yamaha NMAX",
+    status: "Aktif",
+  },
+  {
+    id: 3,
+    nama: "Siti Nurhaliza",
+    alamat: "Surabaya",
+    telepon: "0857-2222-1111",
+    kendaraan: "Toyota Avanza",
+    status: "Nonaktif",
+  },
+  {
+    id: 4,
+    nama: "Ahmad Fauzi",
+    alamat: "Medan",
+    telepon: "0813-5555-7777",
+    kendaraan: "Suzuki Ertiga",
+    status: "Aktif",
+  },
+];
 
 export default function Customers() {
-  const [customers, setCustomers] = useState(customersData);
-  const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    customerId: "",
-    customerName: "",
-    email: "",
-    phone: "",
-    loyalty: "Motor",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setCustomers([...customers, formData]);
-
-    setFormData({
-      customerId: "",
-      customerName: "",
-      email: "",
-      phone: "",
-      loyalty: "Motor",
-    });
-
-    setShowForm(false);
-  };
-
   return (
-    <div>
-      <PageHeader
-        title="Data Kendaraan"
-        breadcrumb={["Dashboard", "Data Kendaraan"]}
-      >
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="rounded-xl bg-yellow-400 px-4 py-2 font-semibold text-gray-900 hover:bg-yellow-500"
-        >
-          Tambah Kendaraan
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <select className="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-600">
+          <option>Semua Pelanggan</option>
+        </select>
+
+        <button className="bg-white border border-gray-100 rounded-xl px-4 py-3 text-sm text-gray-500 flex items-center gap-2">
+          <FileDown size={16} />
+          Import
         </button>
-      </PageHeader>
+      </div>
 
-      {showForm && (
-        <div className="mb-6 rounded-xl bg-white p-6 shadow-md">
-          <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
-            <div>
-              <label className="mb-1 block font-medium">ID Kendaraan</label>
-              <input
-                type="text"
-                name="customerId"
-                value={formData.customerId}
-                onChange={handleChange}
-                className="w-full rounded-lg border p-2 focus:border-yellow-400 focus:outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="mb-1 block font-medium">Nama Pemilik</label>
-              <input
-                type="text"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                className="w-full rounded-lg border p-2 focus:border-yellow-400 focus:outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="mb-1 block font-medium">Email Pemilik</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full rounded-lg border p-2 focus:border-yellow-400 focus:outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="mb-1 block font-medium">No. Telepon</label>
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full rounded-lg border p-2 focus:border-yellow-400 focus:outline-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="mb-1 block font-medium">Jenis Kendaraan</label>
-              <select
-                name="loyalty"
-                value={formData.loyalty}
-                onChange={handleChange}
-                className="w-full rounded-lg border p-2 focus:border-yellow-400 focus:outline-none"
-              >
-                <option value="Motor">Motor</option>
-                <option value="Mobil">Mobil</option>
-                <option value="Truk">Truk</option>
-              </select>
-            </div>
-
-            <div className="flex items-end">
-              <button
-                type="submit"
-                className="rounded-xl bg-gray-900 px-4 py-2 font-semibold text-white hover:bg-gray-800"
-              >
-                Simpan Kendaraan
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
-
-      <div className="mt-6 overflow-hidden rounded-2xl bg-white shadow-md">
-        <div className="flex items-center justify-between border-b bg-gray-900 px-5 py-4">
-          <div>
-            <h2 className="text-lg font-bold text-white">
-              Daftar Kendaraan Pelanggan
-            </h2>
-            <p className="text-sm text-gray-300">
-              Data kendaraan yang terdaftar di bengkel
-            </p>
+      <div className="bg-white rounded-2xl p-5 shadow-sm">
+        <div className="flex justify-between mb-5">
+          <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 w-full max-w-md">
+            <Search size={18} className="text-gray-400" />
+            <input
+              className="bg-transparent outline-none text-sm w-full"
+              placeholder="Cari nama pelanggan atau kendaraan..."
+            />
           </div>
 
-          <span className="rounded-full bg-yellow-400 px-4 py-1 text-sm font-bold text-gray-900">
-            {customers.length} Data
-          </span>
+          <button className="ml-4 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-500 flex items-center gap-2">
+            <Filter size={16} />
+            Filters
+          </button>
         </div>
 
-        <div className="overflow-x-auto p-4">
-          <table className="min-w-full border-separate border-spacing-y-3">
-            <thead>
-              <tr className="text-left text-sm text-gray-500">
-                <th className="px-4 py-2">ID Kendaraan</th>
-                <th className="px-4 py-2">Nama Pemilik</th>
-                <th className="px-4 py-2">Email</th>
-                <th className="px-4 py-2">No. Telepon</th>
-                <th className="px-4 py-2">Jenis Kendaraan</th>
-              </tr>
-            </thead>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-gray-400 border-b border-gray-100">
+              <th className="py-4 w-10">
+                <input type="checkbox" />
+              </th>
+              <th>ID Pelanggan</th>
+              <th>Nama Pelanggan</th>
+              <th>Alamat</th>
+              <th>No Telepon</th>
+              <th>Kendaraan</th>
+              <th>Status</th>
+              <th className="text-right">Aksi</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              {customers.map((customer) => (
-                <tr
-                  key={customer.customerId}
-                  className="rounded-xl bg-gray-50 shadow-sm transition duration-300 hover:bg-yellow-50 hover:shadow-md"
-                >
-                  <td className="rounded-l-xl px-4 py-4 font-bold text-gray-900">
-                    {customer.customerId}
-                  </td>
+          <tbody>
+            {customers.map((item) => (
+              <tr
+                key={item.id}
+                className="border-b border-gray-100 hover:bg-lime-50/40 transition"
+              >
+                <td className="py-5">
+                  <input type="checkbox" />
+                </td>
 
-                  <td className="px-4 py-4 text-gray-700">
-                    {customer.customerName}
-                  </td>
+                <td className="font-semibold text-gray-700">
+                  PL-{String(item.id).padStart(3, "0")}
+                </td>
 
-                  <td className="px-4 py-4 text-gray-600">
-                    {customer.email}
-                  </td>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-lime-100 flex items-center justify-center">
+                      <UserCircle size={24} className="text-lime-600" />
+                    </div>
 
-                  <td className="px-4 py-4 text-gray-600">
-                    {customer.phone}
-                  </td>
-
-                  <td className="rounded-r-xl px-4 py-4">
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-bold ${
-                        customer.loyalty === "Mobil"
-                          ? "bg-blue-100 text-blue-700"
-                          : customer.loyalty === "Truk"
-                            ? "bg-orange-100 text-orange-700"
-                            : "bg-yellow-100 text-yellow-700"
-                      }`}
-                    >
-                      {customer.loyalty}
+                    <span className="font-semibold text-gray-800">
+                      {item.nama}
                     </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                </td>
+
+                <td>{item.alamat}</td>
+                <td>{item.telepon}</td>
+                <td>{item.kendaraan}</td>
+
+                <td>
+                  <span
+                    className={`px-4 py-2 rounded-full text-xs font-semibold ${
+                      item.status === "Aktif"
+                        ? "bg-lime-100 text-lime-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </td>
+
+                <td className="text-right">
+                  <button className="p-2 hover:bg-gray-100 rounded-lg inline-flex">
+                    <MoreHorizontal size={20} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
+          <p>Show result: 4</p>
+
+          <div className="flex items-center gap-3">
+            <button className="px-3 py-1 rounded-lg bg-black text-white">
+              1
+            </button>
+            <button>2</button>
+            <button>3</button>
+            <button>...</button>
+          </div>
         </div>
       </div>
     </div>
